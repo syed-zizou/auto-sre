@@ -9,7 +9,7 @@ k8s_cluster:
   namespace: argocd
 appset_params:
   applicationsetName: merc
-  repoURL: https://github.com/syed-zizou/org-two
-  path: applications
+  repoURL: https://github.com/syed-zizou/auto-sre
+  # path: applications
   namespace: merc
   project: default
