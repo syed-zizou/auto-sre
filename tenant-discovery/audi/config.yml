@@ -1,0 +1,15 @@
+---
+tenant:
+  owner: phillip.price@ecorp.com
+  name: Audi
+  id: audi
+k8s_cluster:
+  owner: admin@company.com
+  address: https://kubernetes.default.svc
+  namespace: argocd
+appset_params:
+  applicationsetName: audi
+  repoURL: https://github.com/syed-zizou/org-two
+  path: applications
+  namespace: audi
+  project: default

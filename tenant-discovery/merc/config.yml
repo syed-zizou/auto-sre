@@ -1,0 +1,15 @@
+---
+tenant:
+  owner: phillip.price@ecorp.com
+  name: Merc
+  id: merc
+k8s_cluster:
+  owner: admin@company.com
+  address: https://kubernetes.default.svc
+  namespace: argocd
+appset_params:
+  applicationsetName: merc
+  repoURL: https://github.com/syed-zizou/org-two
+  path: applications
+  namespace: merc
+  project: default

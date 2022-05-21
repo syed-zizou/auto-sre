@@ -1,0 +1,15 @@
+---
+tenant:
+  owner: phillip.price@ecorp.com
+  name: Honda
+  id: honda
+k8s_cluster:
+  owner: admin@company.com
+  address: https://kubernetes.default.svc
+  namespace: argocd
+appset_params:
+  applicationsetName: honda
+  repoURL: https://github.com/syed-zizou/org-two
+  path: applications
+  namespace: honda
+  project: default
