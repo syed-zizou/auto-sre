@@ -16,8 +16,9 @@ spec:
       project: '{{appset_params.project}}'
       source:
         repoURL: '{{ appset_params.repoURL }}'
-        targetRevision: main
-        path: 'apps/{{tenant.id}}/backend/dev'
+        targetRevision: HEAD
+        path: 'apps/{{tenant.id}}'
+        # path: 'apps/{{tenant.id}}/*/dev'
         # helm:
         #   valueFiles:
         #     - values.{{tenant.id}}.yaml
