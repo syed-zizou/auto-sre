@@ -27,3 +27,5 @@ spec:
         namespace: '{{appset_params.namespace}}'
       syncPolicy:
         automated: {}
+        syncOptions:
+        - CreateNamespace=true
