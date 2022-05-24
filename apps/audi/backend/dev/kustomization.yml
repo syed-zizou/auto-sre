@@ -3,7 +3,7 @@ kind: Kustomization
 commonLabels:
   env: dev
 resources:
-- ../base
+- ../../bases
 namePrefix: dev-
 replicas:
 - name: nginx-deployment

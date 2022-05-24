@@ -3,7 +3,7 @@ kind: Kustomization
 commonLabels:
   env: prd
 resources:
-- ../base
+- ../../bases
 namePrefix: prod-
 replicas:
 - name: nginx-deployment
