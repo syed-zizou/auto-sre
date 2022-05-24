@@ -1,14 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-commonLabels:
-  env: dev
 resources:
 - ../../bases
 namePrefix: dev-
-replicas:
-- name: nginx-deployment
-  count: 1
-images:
-- name: nginx
-  newTag: 1.14.2
-  newName: nginx
+# replicas:
+# - name: nginx-deployment
+#   count: 1
+# images:
+# - name: nginx
+#   newTag: 1.14.2
+#   newName: nginx
