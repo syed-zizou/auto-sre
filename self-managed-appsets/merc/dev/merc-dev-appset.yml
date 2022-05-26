@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: merc-dev
+  namespace: argocd
+spec:
+  generators:
+  - matrix:
+      generators:
+        - list:
+            elements:
+            - server: https://kubernetes.default.svc
+              name: merc-dev
+        - git:
+            repoURL: https://github.com/syed-zizou/auto-sre.git
+            revision: HEAD
+            directories:
+            - path: self-apps/merc/*/dev
+  template:
+    metadata:
+      name: '{{path[1]}}-{{name}}'
+      namespace: merc
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/syed-zizou/auto-sre.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: '{{server}}'
+        namespace: merc
+      syncPolicy:
+        automated:
+          prune: true
+        syncOptions:
+          - CreateNamespace=true

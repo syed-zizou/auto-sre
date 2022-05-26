@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: root-appset-tenant
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/syed-zizou/auto-sre.git
+        revision: main
+        files:
+          - path: "self-argoapps-appset/audi/dev"
+          - path: "self-argoapps-appset/audi/prod"
+          - path: "self-argoapps-appset/honda/dev"
+          - path: "self-argoapps-appset/honda/prod"
+          - path: "self-argoapps-appset/merc/dev"
+          - path: "self-argoapps-appset/merc/prod"
+  template:
+    metadata:
+      name: '{{path[1]}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/syed-zizou/auto-sre.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server:  https://kubernetes.default.svc
+        namespace: argocd
+      syncPolicy:
+        automated: {}

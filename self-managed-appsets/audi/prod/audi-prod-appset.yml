@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: audi-prod
+  namespace: argocd
+spec:
+  generators:
+  - matrix:
+      generators:
+        - list:
+            elements:
+            - server: https://kubernetes.default.svc
+              name: audi-prod
+        - git:
+            repoURL: https://github.com/syed-zizou/auto-sre.git
+            revision: HEAD
+            directories:
+            - path: self-apps/audi/*/prod
+  template:
+    metadata:
+      name: '{{path[1]}}-{{name}}'
+      namespace: audi
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/syed-zizou/auto-sre.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: '{{server}}'
+        namespace: audi
+      syncPolicy:
+        automated:
+          prune: true
+        syncOptions: []

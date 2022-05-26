@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: honda-dev
+  namespace: argocd
+spec:
+  generators:
+  - matrix:
+      generators:
+        - list:
+            elements:
+            - server: https://kubernetes.default.svc
+              name: honda-dev
+        - git:
+            repoURL: https://github.com/syed-zizou/auto-sre.git
+            revision: HEAD
+            directories:
+            - path: self-apps/honda/*/dev
+  template:
+    metadata:
+      name: '{{path[1]}}-{{name}}'
+      namespace: honda
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/syed-zizou/auto-sre.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: '{{server}}'
+        namespace: honda
+      syncPolicy:
+        automated:
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
